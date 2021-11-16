@@ -8,6 +8,9 @@ import MainNavigator from './Main'
 import { navigationRef } from './utils'
 import LoginAuthentication from '@/Containers/LoginAuthentication'
 import SignUpAuthentication from '@/Containers/SignUpAuthentication'
+import HomeScreen from '@/Containers/HomeScreen'
+import EventDetails from '@/Containers/EventDetails'
+import Leaderboards from '@/Containers/Leaderboards'
 
 const Stack = createStackNavigator()
 
@@ -24,6 +27,9 @@ const ApplicationNavigator = () => {
           <Stack.Screen name="Startup" component={StartupContainer} />
           <Stack.Screen name="AuthScreenLogin" component={LoginAuthentication} />
           <Stack.Screen name="AuthScreenSignUp" component={SignUpAuthentication} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="EventDetails" component={EventDetails} />
+          <Stack.Screen name="Leaderboards" component={Leaderboards} />
           <Stack.Screen
             name="Main"
             component={MainNavigator}

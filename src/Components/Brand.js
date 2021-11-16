@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { View, Image } from 'react-native'
+import { View, Image, Text } from 'react-native'
 import { useTheme } from '@/Hooks'
 
-const Brand = ({ height, width, mode }) => {
-  const { Layout, Images } = useTheme()
+const Brand = ({ height, width, mode, label }) => {
+  const { Layout, Images, Fonts } = useTheme()
 
   return (
     <View style={{ height, width }}>
       <Image style={Layout.fullSize} source={Images.logo} resizeMode={mode} />
+      {label && <Text style={[Fonts.textPrimaryRegular, {fontWeight: '700'}]}>Better Together</Text>}
     </View>
   )
 }
@@ -23,6 +24,7 @@ Brand.defaultProps = {
   height: 200,
   mode: 'contain',
   width: 200,
+  label: false
 }
 
 export default Brand

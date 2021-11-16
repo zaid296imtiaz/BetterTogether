@@ -43,24 +43,34 @@ const LoginAuthentication = () => {
   }
 
   return (
-    <ImageBackground
-      source={Images.auth_background}
+    // <ImageBackground
+    //   source={Images.auth_background}
+    //   style={[
+    //     Layout.colCenter,
+    //     {
+    //       flex: 1,
+    //       height: screenHeight,
+    //       width: screenWidth,
+    //     },
+    //   ]}
+    //   resizeMode="cover"
+    // >
+    <View
       style={[
         Layout.colCenter,
+        Common.backgroundDefault,
         {
           flex: 1,
-          height: screenHeight,
-          width: screenWidth,
         },
       ]}
-      resizeMode="cover"
     >
-      <Brand height={120} width={120} />
+      <Brand height={120} width={150} label />
+      <View style={{ height: 50 }} />
       <View
         style={[
           Common.backgroundTranslucent,
           {
-            height: screenHeight / 1.4,
+            height: screenHeight / 1.5,
             width: '90%',
             // backgroundColor: Colors.translucent,
             borderRadius: 10,
@@ -68,7 +78,7 @@ const LoginAuthentication = () => {
         ]}
       >
         <ScrollView
-          style={Layout.fill}
+          style={[Layout.fill]}
           contentContainerStyle={[
             // Layout.fill,
             // Layout.colHCenter,
@@ -80,7 +90,7 @@ const LoginAuthentication = () => {
           <View
             style={[
               Layout.justifyContentBetween,
-              { height: screenHeight / 1.5 },
+              { height: screenHeight / 1.6 },
             ]}
           >
             <View
@@ -94,7 +104,12 @@ const LoginAuthentication = () => {
             >
               {(isLoading || isFetching) && <ActivityIndicator />}
               {!isSuccess ? (
-                <Text style={Fonts.textRegular}>{error}</Text>
+                <View>
+                <Text style={[Fonts.titleSmall]}>Hello</Text>
+                <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
+                  Sign In to you account
+                </Text>
+              </View>
               ) : (
                 <View>
                   <Text style={[Fonts.titleSmall]}>Hello</Text>
@@ -126,9 +141,16 @@ const LoginAuthentication = () => {
 
             <TouchableOpacity
               style={[Common.button.rounded, Gutters.regularBMargin]}
-              onPress={() => {}}
+              onPress={() => {
+                navigate('HomeScreen')
+              }}
             >
-              <Text style={[Fonts.textRegular, { color: darkMode ? Colors.text : Colors.white }]}>
+              <Text
+                style={[
+                  Fonts.textRegular,
+                  { color: darkMode ? Colors.white : Colors.white },
+                ]}
+              >
                 Sign In
               </Text>
             </TouchableOpacity>
@@ -145,7 +167,8 @@ const LoginAuthentication = () => {
           </View>
         </ScrollView>
       </View>
-    </ImageBackground>
+    </View>
+    // </ImageBackground>
   )
 }
 

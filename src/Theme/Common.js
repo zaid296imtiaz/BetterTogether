@@ -20,6 +20,12 @@ export default function ({ Colors, ...args }) {
       backgroundTranslucent: {
         backgroundColor: Colors.translucent,
       },
+      primaryColor: {
+        color: Colors.primary
+      },
+      backgroundDefault: {
+        backgroundColor: Colors.backgroundDefault
+      },
       backgroundReset: {
         backgroundColor: Colors.transparent,
       },

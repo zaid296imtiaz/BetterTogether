@@ -1,8 +1,9 @@
 const Colors = {
-  primary: '#52F3CF',
+  primary: '#078A7C',
   text: 'white',
   inputBackground: 'gray',
-  translucent: 'rgba(0,0,0,0.8)',
+  translucent: 'rgba(20,20,20,0.8)',
+  backgroundDefault: '#393939'
 }
 
 const NavigationColors = {

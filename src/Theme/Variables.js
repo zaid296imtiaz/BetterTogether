@@ -10,12 +10,13 @@
  */
 export const Colors = {
   // Example colors:
+  backgroundDefault: '#f2f2f2',
   transparent: 'rgba(0,0,0,0)',
   translucent: 'rgba(255,255,255,0.9)',
   inputBackground: '#FFFFFF',
   white: '#ffffff',
   text: '#212529',
-  primary: '#36A28A',
+  primary: '#078A7C',
   success: '#28a745',
   error: '#dc3545',
 }

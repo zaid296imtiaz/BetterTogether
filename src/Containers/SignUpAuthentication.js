@@ -43,19 +43,29 @@ const SignUpAuthentication = () => {
   }
 
   return (
-    <ImageBackground
-      source={Images.auth_background}
+    // <ImageBackground
+    //   source={Images.auth_background}
+    //   style={[
+    //     Layout.colCenter,
+    //     {
+    //       flex: 1,
+    //       height: screenHeight,
+    //       width: screenWidth,
+    //     },
+    //   ]}
+    //   resizeMode="cover"
+    // >
+    <View
       style={[
         Layout.colCenter,
+        Common.backgroundDefault,
         {
           flex: 1,
-          height: screenHeight,
-          width: screenWidth,
         },
       ]}
-      resizeMode="cover"
     >
-      <Brand height={120} width={120} />
+      <Brand height={120} width={150} label />
+      <View style={{ height: 50 }} />
       <View
         style={[
           Common.backgroundTranslucent,
@@ -73,13 +83,13 @@ const SignUpAuthentication = () => {
             // Layout.colHCenter,
             Gutters.regularHPadding,
             Gutters.regularVPadding,
-            Layout.justifyContentBetween,
+            // Layout.justifyContentBetween,
           ]}
         >
           <View
             style={[
-              Layout.justifyContentBetween,
-              { height: screenHeight / 1.5 },
+              // Layout.justifyContentBetween,
+              { height: screenHeight / 1.4 },
             ]}
           >
             <View
@@ -87,13 +97,18 @@ const SignUpAuthentication = () => {
                 [
                   Layout.colHCenter,
                   Gutters.regularHPadding,
-                  Gutters.regularVPadding,
+                  Gutters.smallVPadding,
                 ],
               ]}
             >
               {(isLoading || isFetching) && <ActivityIndicator />}
               {!isSuccess ? (
-                <Text style={Fonts.textRegular}>{error}</Text>
+                <View>
+                <Text style={[Fonts.titleSmall]}>Sign Up</Text>
+                <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
+                  Create new account
+                </Text>
+              </View>
               ) : (
                 <View>
                   <Text style={[Fonts.titleSmall]}>Sign Up</Text>
@@ -134,7 +149,12 @@ const SignUpAuthentication = () => {
               style={[Common.button.rounded, Gutters.regularBMargin]}
               onPress={() => {}}
             >
-              <Text style={[Fonts.textRegular, { color: darkMode ? Colors.text : Colors.white }]}>
+              <Text
+                style={[
+                  Fonts.textRegular,
+                  { color: darkMode ? Colors.white : Colors.white },
+                ]}
+              >
                 Sign Up
               </Text>
             </TouchableOpacity>
@@ -145,12 +165,7 @@ const SignUpAuthentication = () => {
               <TouchableOpacity
                 onPress={() => navigateAndSimpleReset('AuthScreenLogin')}
               >
-                <Text
-                  style={[
-                    Fonts.textPrimarySmall,
-                    Fonts.textRight,,
-                  ]}
-                >
+                <Text style={[Fonts.textPrimarySmall, Fonts.textRight]}>
                   Sign In
                 </Text>
               </TouchableOpacity>
@@ -158,7 +173,8 @@ const SignUpAuthentication = () => {
           </View>
         </ScrollView>
       </View>
-    </ImageBackground>
+      {/* </ImageBackground> */}
+    </View>
   )
 }
 

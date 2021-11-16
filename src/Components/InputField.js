@@ -18,6 +18,7 @@ const InputField = ({
   return (
     <View>
       <Text style={[Fonts.textSmall]}>{label}</Text>
+      <View style={{height: 5}} />
       <TextInput
         style={{ height: height, margin: margin, padding: padding }}
         placeholder={placeholder}
@@ -43,7 +44,9 @@ InputField.defaultProps = {
   height: 40,
   margin: 0,
   padding: 10,
-  borderBottomWidth: 1,
+  borderWidth: 1,
+  borderColor: '#aaa',
+  borderRadius: 10,
   placeholder: 'Enter value...',
   onChangeText: () => {},
   label: 'Text Input',

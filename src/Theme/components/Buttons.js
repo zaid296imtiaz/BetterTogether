@@ -9,7 +9,7 @@ export default function ({ Colors, Gutters, Layout }) {
   }
   const rounded = {
     ...base,
-    borderRadius: 20,
+    borderRadius: 10,
   }
 
   return StyleSheet.create({
