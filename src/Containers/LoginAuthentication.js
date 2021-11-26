@@ -10,6 +10,7 @@ import {
   Image,
   ImageBackground,
   Button,
+  Alert,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -20,6 +21,7 @@ import { changeTheme } from '@/Store/Theme'
 import { Colors } from '@/Theme/Variables'
 import { InputField } from '@/Components'
 import { navigate } from '@/Navigators/utils'
+import axios from 'axios'
 
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
@@ -33,6 +35,8 @@ const LoginAuthentication = () => {
   const [userId, setUserId] = useState('9')
   const [fetchOne, { data, isSuccess, isLoading, isFetching, error }] =
     useLazyFetchOneQuery()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   useEffect(() => {
     fetchOne(userId)
@@ -40,6 +44,31 @@ const LoginAuthentication = () => {
 
   const onChangeTheme = ({ theme, darkMode }) => {
     dispatch(changeTheme({ theme, darkMode }))
+  }
+
+  const onChangeEmail = text => setEmail(text)
+  const onChangePassword = text => setPassword(text)
+
+  const loginUser = () => {
+    const URL = `${global.APP_URL}/loginAuth`
+
+    const data = {
+      email,
+      password,
+    }
+
+    try {
+      axios
+        .post(URL, data)
+        .then(response => {
+          if (response.status === 200 && response.data === 'authenticated')
+            navigate('HomeScreen')
+          else Alert.alert('Username or Password incorrect')
+        })
+        .catch(e => console.log(e))
+    } catch {
+      e => console.log(e)
+    }
   }
 
   return (
@@ -105,11 +134,11 @@ const LoginAuthentication = () => {
               {(isLoading || isFetching) && <ActivityIndicator />}
               {!isSuccess ? (
                 <View>
-                <Text style={[Fonts.titleSmall]}>Hello</Text>
-                <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
-                  Sign In to you account
-                </Text>
-              </View>
+                  <Text style={[Fonts.titleSmall]}>Hello</Text>
+                  <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
+                    Sign In to you account
+                  </Text>
+                </View>
               ) : (
                 <View>
                   <Text style={[Fonts.titleSmall]}>Hello</Text>
@@ -128,21 +157,31 @@ const LoginAuthentication = () => {
                 // Common.backgroundPrimary,
               ]}
             >
-              <InputField placeholder="Enter Email" label="Email Address" />
+              <InputField
+                placeholder="Enter Email"
+                label="Email Address"
+                onChangeText={onChangeEmail}
+              />
               <View style={{ height: 15 }} />
-              <InputField placeholder="Enter Password" label="Password" />
+              <InputField
+                placeholder="Enter Password"
+                label="Password"
+                secureTextEntry={true}
+                onChangeText={onChangePassword}
+              />
               <View style={{ height: 15 }} />
-              <TouchableOpacity onPress={() => {}}>
+              {/* <TouchableOpacity onPress={() => {}}>
                 <Text style={[Fonts.textPrimarySmall, Fonts.textRight]}>
                   Forgot Password?
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
 
             <TouchableOpacity
               style={[Common.button.rounded, Gutters.regularBMargin]}
               onPress={() => {
-                navigate('HomeScreen')
+                // navigate('HomeScreen')
+                loginUser()
               }}
             >
               <Text

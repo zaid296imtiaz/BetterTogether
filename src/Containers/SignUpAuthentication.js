@@ -10,6 +10,8 @@ import {
   Image,
   ImageBackground,
   Button,
+  Linking,
+  Alert,
 } from 'react-native'
 import { useDispatch } from 'react-redux'
 import { useTranslation } from 'react-i18next'
@@ -20,6 +22,7 @@ import { changeTheme } from '@/Store/Theme'
 import { Colors } from '@/Theme/Variables'
 import { InputField } from '@/Components'
 import { navigateAndSimpleReset } from '@/Navigators/utils'
+import axios from 'axios'
 
 const screenHeight = Dimensions.get('window').height
 const screenWidth = Dimensions.get('window').width
@@ -34,12 +37,50 @@ const SignUpAuthentication = () => {
   const [fetchOne, { data, isSuccess, isLoading, isFetching, error }] =
     useLazyFetchOneQuery()
 
+  const [userObj, setUserObj] = useState({
+    address1: '',
+    city: '',
+    dob: '',
+    email: '',
+    fullName: '',
+    location: '',
+    password: '',
+    state: '',
+    userName: '',
+    zip: '',
+  })
+
   useEffect(() => {
     fetchOne(userId)
   }, [fetchOne, userId])
 
   const onChangeTheme = ({ theme, darkMode }) => {
     dispatch(changeTheme({ theme, darkMode }))
+  }
+
+  const textFieldOnChange = (value, name) => {
+    userObj[name] = value
+    setUserObj(userObj)
+    console.log(userObj)
+  }
+
+  const registerUser = () => {
+    const URL = `${global.APP_URL}/user`
+
+    try {
+      axios
+        .post(URL, userObj)
+        .then(response => {
+          if (response.status === 200) {
+            console.log('Success')
+          } else {
+            console.log('Failed')
+          }
+        })
+        .catch(e => console.log(e))
+    } catch {
+      e => console.log(e)
+    }
   }
 
   return (
@@ -89,7 +130,7 @@ const SignUpAuthentication = () => {
           <View
             style={[
               // Layout.justifyContentBetween,
-              { height: screenHeight / 1.4 },
+              { height: screenHeight },
             ]}
           >
             <View
@@ -104,11 +145,11 @@ const SignUpAuthentication = () => {
               {(isLoading || isFetching) && <ActivityIndicator />}
               {!isSuccess ? (
                 <View>
-                <Text style={[Fonts.titleSmall]}>Sign Up</Text>
-                <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
-                  Create new account
-                </Text>
-              </View>
+                  <Text style={[Fonts.titleSmall]}>Sign Up</Text>
+                  <Text style={[Fonts.textSmall, { fontWeight: '300' }]}>
+                    Create new account
+                  </Text>
+                </View>
               ) : (
                 <View>
                   <Text style={[Fonts.titleSmall]}>Sign Up</Text>
@@ -127,27 +168,90 @@ const SignUpAuthentication = () => {
                 // Common.backgroundPrimary,
               ]}
             >
-              <InputField placeholder="Name" label="Full Name" />
+              <InputField
+                placeholder="Name"
+                label="Full Name"
+                name="fullName"
+                onChangeText={textFieldOnChange}
+              />
               <View style={{ height: 15 }} />
-              <InputField placeholder="Enter Email" label="Email Address" />
+              <InputField
+                placeholder="Enter Email"
+                label="Email Address"
+                name="email"
+                onChangeText={textFieldOnChange}
+              />
+              {/* <View style={{ height: 15 }} />
+              <InputField
+                placeholder="Username"
+                label="Username"
+                name="userName"
+                onChangeText={textFieldOnChange}
+              /> */}
+              <View style={{ height: 15 }} />
+              <InputField
+                placeholder="DOB"
+                label="Birth Date"
+                name="dob"
+                onChangeText={textFieldOnChange}
+              />
               <View style={{ height: 15 }} />
               <View style={[Layout.row, Layout.rowHCenter]}>
                 <View style={[Layout.fill]}>
-                  <InputField placeholder="Username" label="Username" />
+                  <InputField
+                    placeholder="City, Country"
+                    label="City"
+                    name="city"
+                    onChangeText={textFieldOnChange}
+                  />
                 </View>
                 <View style={{ width: 15 }} />
                 <View style={[Layout.fill]}>
-                  <InputField placeholder="City, Country" label="Location" />
+                  <InputField
+                    placeholder="Street name"
+                    label="Address"
+                    name="address1"
+                    onChangeText={textFieldOnChange}
+                  />
                 </View>
               </View>
               <View style={{ height: 15 }} />
-              <InputField placeholder="Enter Password" label="Password" />
+              <View style={[Layout.row, Layout.rowHCenter]}>
+                <View style={[Layout.fill]}>
+                  <InputField
+                    placeholder="State"
+                    label="Province"
+                    name="state"
+                    onChangeText={textFieldOnChange}
+                  />
+                </View>
+                <View style={{ width: 15 }} />
+                <View style={[Layout.fill]}>
+                  <InputField
+                    placeholder="Zip code"
+                    label="Zip"
+                    name="zip"
+                    onChangeText={textFieldOnChange}
+                  />
+                </View>
+              </View>
+              <View style={{ height: 15 }} />
+              <InputField
+                placeholder="Enter Password"
+                label="Password"
+                name="password"
+                secureTextEntry={true}
+                onChangeText={textFieldOnChange}
+              />
               <View style={{ height: 15 }} />
             </View>
 
             <TouchableOpacity
               style={[Common.button.rounded, Gutters.regularBMargin]}
-              onPress={() => {}}
+              onPress={() => {
+                registerUser()
+                Alert.alert("User Created")
+              }}
             >
               <Text
                 style={[

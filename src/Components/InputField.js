@@ -11,6 +11,7 @@ const InputField = ({
   onChangeText,
   value,
   label,
+  name,
   ...rest
 }) => {
   const { Fonts } = useTheme()
@@ -22,7 +23,7 @@ const InputField = ({
       <TextInput
         style={{ height: height, margin: margin, padding: padding }}
         placeholder={placeholder}
-        onChangeText={onChangeText}
+        onChangeText={(v) => onChangeText(v, name)}
         value={value}
         {...rest}
       />

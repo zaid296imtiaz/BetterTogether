@@ -28,7 +28,7 @@ const screenWidth = Dimensions.get('window').width
 
 const events = [
   {
-    username: 'Brynn Adams',
+    username: 'Umar Amjad',
     avatar: require('../Assets/Images/avatar1.jpg'),
     eventImage: require('../Assets/Images/city.jpg'),
     title: 'Plant a Tree',
@@ -39,8 +39,8 @@ const events = [
       'This event is open for all volunteers. Please participate in cleaning city',
   },
   {
-    username: 'Elssa Woods',
-    avatar: require('../Assets/Images/avatar2.jpg'),
+    username: 'Zaid Imtiaz',
+    avatar: require('../Assets/Images/user2.jpg'),
     eventImage: require('../Assets/Images/trash.jpg'),
     title: 'Clean City',
     location: 'Windsor, Ontario',
@@ -57,18 +57,19 @@ const Leaderboards = () => {
   return (
     <ScrollView>
       <Header
-        backgroundColor="#fff"
+        backgroundColor={darkMode ? '#000' : '#fff'}
         leftComponent={{
           icon: 'arrow-back',
           color: '#fff',
           iconStyle: [Common.primaryColor],
+          onPress: () => navigate('HomeScreen'),
         }}
         centerComponent={{ text: 'Leaderboards', style: [Common.primaryColor] }}
-        rightComponent={{
-          icon: 'more-vert',
-          color: '#fff',
-          iconStyle: [Common.primaryColor],
-        }}
+        // rightComponent={{
+        //   icon: 'more-vert',
+        //   color: '#fff',
+        //   iconStyle: [Common.primaryColor],
+        // }}
       />
 
       <View style={[Gutters.regularHMargin, Gutters.regularVPadding]}>
@@ -79,7 +80,12 @@ const Leaderboards = () => {
         style={[
           Gutters.smallVPadding,
           Gutters.smallHPadding,
-          { borderRadius: 10, backgroundColor: '#fff' },
+          {
+            borderRadius: 10,
+            backgroundColor: darkMode
+              ? 'rgba(60,60,60,0.8)'
+              : 'rgba(255,255,255,0.9)',
+          },
         ]}
       >
         <View
@@ -88,7 +94,13 @@ const Leaderboards = () => {
             Layout.rowHCenter,
             Gutters.smallVPadding,
             Gutters.smallHPadding,
-            { borderRadius: 10, backgroundColor: '#fff' },
+            {
+              borderRadius: 10,
+              marginBottom: 5,
+              backgroundColor: darkMode
+                ? 'rgba(60,60,60,0.8)'
+                : 'rgba(255,255,255,0.9)',
+            },
           ]}
         >
           <Text style={[Fonts.titleSmall]}>1.</Text>
@@ -96,7 +108,9 @@ const Leaderboards = () => {
           <Avatar size={48} rounded source={events[0].avatar} />
           <View style={{ width: 10 }} />
           <Text style={[Fonts.textRegular]}>{events[0].username}</Text>
-          <Text style={[Fonts.textPrimarySmall, {marginLeft: 'auto'}]}>1000 Points</Text>
+          <Text style={[Fonts.textPrimarySmall, { marginLeft: 'auto' }]}>
+            120 Points
+          </Text>
         </View>
         <View
           style={[
@@ -104,7 +118,12 @@ const Leaderboards = () => {
             Layout.rowHCenter,
             Gutters.smallVPadding,
             Gutters.smallHPadding,
-            { borderRadius: 10, backgroundColor: '#fff' },
+            {
+              borderRadius: 10,
+              backgroundColor: darkMode
+                ? 'rgba(60,60,60,0.8)'
+                : 'rgba(255,255,255,0.9)',
+            },
           ]}
         >
           <Text style={[Fonts.titleSmall]}>2.</Text>
@@ -112,7 +131,9 @@ const Leaderboards = () => {
           <Avatar size={48} rounded source={events[1].avatar} />
           <View style={{ width: 10 }} />
           <Text style={[Fonts.textRegular]}>{events[1].username}</Text>
-          <Text style={[Fonts.textPrimarySmall, {marginLeft: 'auto'}]}>800 Points</Text>
+          <Text style={[Fonts.textPrimarySmall, { marginLeft: 'auto' }]}>
+            70 Points
+          </Text>
         </View>
       </View>
     </ScrollView>
